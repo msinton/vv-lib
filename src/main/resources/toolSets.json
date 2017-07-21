@@ -1,0 +1,68 @@
+[
+  {
+    "set":["iron axe","fine iron axe","stone axe","fine stone axe","stone sledgehammer","iron sword","fine iron sword",
+      "stone sword","bone knife","diamond edged knife","iron knife","fine iron knife","stone knife","fine stone knife"],
+    "skills":[{"skill":"attacker"}]
+  },
+  {
+    "set":["bed","hide mat"], "skills":[{"skill":"reproducer"}]
+  },
+  {
+    "set":["stone chisel","iron chisel"], "skills":[{"skill":"mason"}]
+  },
+  {
+    "set":["feather pillow","cushion"], "skills":[{"skill":"reproducer"}]
+  },
+  {
+    "set":["stone wall","wooden fence","fine wooden fence"]
+  },
+  {
+    "set":["clay furnace","stone furnace","smelter"]
+  },
+  {
+    "set":["iron hammer","stone hammer","fine stone hammer"]
+  },
+  {
+    "set":["wooden mallet", "iron hammer","stone hammer","fine stone hammer", "stone sledgehammer"], "skills":[{"skill":"mason"}]
+  },
+  {
+    "set":["bone helmet","hide helmet","iron helmet","wooden helmet"]
+  },
+  {
+    "set":["bone knife","diamond edged knife","iron knife","fine iron knife","stone knife","fine stone knife"],
+    "skills":[{"skill":"cook"},{"skill":"potter"},{"skill":"carpenter"},{"skill":"tailor"},{"skill":"goldsmith"}]
+  },
+  {
+    "set":["bone needle","iron needle","wooden needle"]
+  },
+  {
+    "set":["clay oven","stone oven"]
+  },
+  {
+    "set":["iron pickaxe","fine iron pickaxe","stone pickaxe","fine stone pickaxe"]
+  },
+  {
+    "set":["stone plough","fine stone plough","iron plough","fine iron plough"]
+  },
+  {
+    "set":["clay pot","iron pot"]
+  },
+  {
+    "set":["fishing rod","fine fishing rod"], "skills":[{"skill":"fisherman"}]
+  },
+  {
+    "set":["boat","fine boat"], "skills":[{"skill":"fisherman"}]
+  },
+  {
+    "set":["bone scythe","iron scythe","stone scythe","fine stone scythe"]
+  },
+  {
+    "set":["iron shield","fine iron shield","wooden shield"]
+  },
+  {
+    "set":["wooden trough","stone trough"]
+  },
+  {
+    "set":["iron saw","bone saw"]
+  }
+]

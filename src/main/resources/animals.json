@@ -1,0 +1,34 @@
+[
+   {
+     "name":"horse",
+     "pregnancy":{"duration":3, "maxLitterSize":1},
+     "harvest":{"requires":1, "resourcesGained":[{"r":{"res":"hide"}, "n":3}, {"r":{"res":"bone"}, "n":2}], "meatGained":4},
+     "hexCapacity":8,
+     "personCapacity":2,
+     "rarity":5
+   },
+   {
+     "name":"boar",
+     "pregnancy":{"duration":2, "maxLitterSize":1},
+     "harvest":{"requires":1, "resourcesGained":[{"r":{"res":"hide"}, "n":2}, {"r":{"res":"bone"}, "n":1}], "meatGained":3},
+     "hexCapacity":12,
+     "personCapacity":1,
+     "rarity":5
+   },
+   {
+     "name":"chicken",
+     "pregnancy":{"duration":0, "maxLitterSize":3},
+     "harvest":{"requires":2, "resourcesGained":[{"r":{"res":"feathers"}, "n":1}], "meatGained":1},
+     "hexCapacity":24,
+     "personCapacity":4,
+     "rarity":5
+   },
+   {
+     "name":"rabbit",
+     "pregnancy":{"duration":0, "maxLitterSize":4},
+     "harvest":{"requires":4, "resourcesGained":[{"r":{"res":"hide"}, "n":1}], "meatGained":2},
+     "hexCapacity":36,
+     "personCapacity":6,
+     "rarity":5
+   }
+]

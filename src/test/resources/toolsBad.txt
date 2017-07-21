@@ -1,0 +1,3 @@
+[
+ {"name":"name","startLife":2,"worth":3,"bonuses":[{"s":{"skill":"carpenter"},"n":1}],"madeFrom":[{"r":{"res"}}]}
+]
