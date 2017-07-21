@@ -9,6 +9,11 @@ import com.consideredgames.game.state.State
   */
 class FeedEventsToState(events: PopsEvent, var state: State) {
 
+  def run(event: Event): State = {
+    state = EventProcessor.run(event, state)
+    state
+  }
+  
   def run(): State = {
     events.popEvent.map(EventProcessor.run(_, state)).fold(state) { newState =>
       state = newState

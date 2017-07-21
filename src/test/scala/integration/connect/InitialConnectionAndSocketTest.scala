@@ -1,7 +1,9 @@
 package integration.connect
 
+import java.util.Date
+
 import com.consideredgames.connect.MessageHandler
-import com.consideredgames.game.event.FeedEventsToState
+import com.consideredgames.game.event.{FeedEventsToState, StartGame}
 import com.consideredgames.game.model.player.PlayerColours._
 import com.consideredgames.game.state.State
 import com.consideredgames.message.Messages._
@@ -44,7 +46,6 @@ class InitialConnectionAndSocketTest extends FunSuite {
       Thread.sleep(500)
     }
 
-    println("-1-", feedEventsToState.state)
     messageHandler.sendMessage(Join(myColour = Blue))
     while(feedEventsToState.run().activity.joinedGames.isEmpty) {
       Thread.sleep(500)
@@ -56,11 +57,10 @@ class InitialConnectionAndSocketTest extends FunSuite {
       Thread.sleep(500)
     }
 
-//    TODO Stream completed successfully -> add event to set disconnected
     assert(true)
   }
 
-  test("Login and connect to server and create private game") {
+  test("Login and connect to server and create private game for 1 and start") {
 
     val messageHandler = MessageHandler()
     val feedEventsToState = new FeedEventsToState(messageHandler, State())
@@ -73,22 +73,31 @@ class InitialConnectionAndSocketTest extends FunSuite {
     }
 
     val gameOptions = NewGameOptions(privateGame = true)
-    messageHandler.sendMessage(NewGameRequest(myColour = Blue, newGameOptions = Option(gameOptions)))
+    messageHandler.sendMessage(NewGameRequest(numberOfPlayers = 1, myColour = Blue, newGameOptions = Option(gameOptions)))
     while(feedEventsToState.run().activity.joinedGames.isEmpty) {
       Thread.sleep(500)
     }
 
-    messageHandler.popEvent.foreach(s => println(s"popped: $s"))
-    messageHandler.popEvent.foreach(s => println(s"popped: $s"))
-
     // TODO join 2 more players and get activeGameId
     // Also test other scenarios - try to join gameId - when exists or does not exist
     // try joins in quick succession - to ensure new games spawned correctly
+    println("-1-", feedEventsToState.state)
+
+    while(feedEventsToState.run().readyGames.isEmpty) {
+      Thread.sleep(500)
+    }
+
+    println(new Date())
+    val inGameState = feedEventsToState.run(StartGame(feedEventsToState.run().readyGames.head.gameId))
+    assert(inGameState.game.nonEmpty)
+    println(new Date())
 
     messageHandler.sendMessage(Logout())
     while(feedEventsToState.run().connectivity.connected) {
       Thread.sleep(500)
     }
+    println("-2-", feedEventsToState.state)
+
 
     assert(true)
   }

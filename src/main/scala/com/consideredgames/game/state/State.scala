@@ -33,6 +33,7 @@ object State extends LazyLogging {
       case u: List[NewGameReady] => readyGames = u
       case u: List[Errors] => errors = u
       case u: GameData => game = Option(u)
+      case _: Unit => // do nothing
       case x => logger.error(s"unexpected state update: $x")
     }
 

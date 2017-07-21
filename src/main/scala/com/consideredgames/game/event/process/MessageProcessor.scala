@@ -19,7 +19,7 @@ object MessageProcessor {
 
       case m: NewGameReady => m :: state.readyGames
 
-      case x => s"unhandled message $x"
+      case x => println(s"unhandled message $x")
 
     }
 
