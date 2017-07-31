@@ -4,8 +4,8 @@ import akka.Done
 import akka.actor.{ActorRef, ActorSystem}
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.model.ws.{TextMessage, WebSocketRequest, WebSocketUpgradeResponse}
-import akka.stream.{ActorMaterializer, OverflowStrategy}
 import akka.stream.scaladsl._
+import akka.stream.{ActorMaterializer, OverflowStrategy}
 import com.consideredgames.message.MessageMapper
 import com.consideredgames.message.Messages.Message
 

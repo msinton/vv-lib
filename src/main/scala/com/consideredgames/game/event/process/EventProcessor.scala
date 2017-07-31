@@ -4,7 +4,7 @@ import com.consideredgames.game.event._
 import com.consideredgames.game.model.animals.AnimalInfo
 import com.consideredgames.game.model.game.{GameBuilder, NewGameConfig}
 import com.consideredgames.game.model.person.tools.{ToolInfo, Tools}
-import com.consideredgames.game.state.{Connectivity, StartGameError, State}
+import com.consideredgames.game.state.{Connectivity, Errors, StartGameError, State}
 import com.consideredgames.message.Messages._
 
 import scala.util.Try
@@ -15,10 +15,12 @@ import scala.util.Try
 object EventProcessor {
 
   def run(e: ConnectionEvent, state: State): State = {
-    e match {
-      case Connected => State(Connectivity(connected = true), state)
-      case Disconnected => State(Connectivity(), state)
+    val update = e match {
+      case Connected => Connectivity(connected = true)
+      case Disconnected => Connectivity()
+      case ConnectAttempt => Errors(Nil)
     }
+    State(update, state)
   }
 
   private def readyGameToGameConfig(readyGame: NewGameReady): Try[NewGameConfig] = {
@@ -37,11 +39,11 @@ object EventProcessor {
     val update = e match {
       case StartGame(id) =>
         val game = for {
-          readyGame <- state.readyGames.find { _.gameId == id}
+          readyGame <- state.ready.games.find { _.gameId == id}
           config <- readyGameToGameConfig(readyGame).toOption
           profile <- state.profile
         } yield GameBuilder.build(config, profile.username)
-        game.getOrElse(StartGameError("Game failed to start"))
+        game.getOrElse(Errors(StartGameError("Game failed to start"), state.errors))
     }
 
     State(update, state)

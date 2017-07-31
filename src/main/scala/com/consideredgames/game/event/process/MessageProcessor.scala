@@ -1,6 +1,6 @@
 package com.consideredgames.game.event.process
 
-import com.consideredgames.game.state.{Profile, State}
+import com.consideredgames.game.state._
 import com.consideredgames.message.Messages._
 
 /**
@@ -9,20 +9,27 @@ import com.consideredgames.message.Messages._
 object MessageProcessor {
 
   def run(message: Message, state: State): State = {
-    val update = message match {
+    val updates: Seq[Any] = message match {
 
-      case RegisterResponseSuccess(username, _) => Profile(username)
+      case RegisterResponseSuccess(username, _) => Seq(
+        Profile(username),
+        Errors(Nil))
 
-      case JoinResponseSuccess(gameId) => state.activity.joinedGame(gameId)
+      case LoginResponseSuccess(username, _) => Seq(
+        Profile(username),
+        Errors(Nil))
 
-      case NewGameResponse(gameId) => state.activity.joinedGame(gameId)
+      case JoinResponseSuccess(gameId) => Seq(state.activity.joinedGame(gameId))
+      case NewGameResponse(gameId) => Seq(state.activity.joinedGame(gameId))
+      case m: NewGameReady => Seq(ReadyGames(m :: state.ready.games))
 
-      case m: NewGameReady => m :: state.readyGames
+      case m: Error => Seq(Errors(m, state.errors))
 
+      case SessionStarted() => Nil // do nothing
       case x => println(s"unhandled message $x")
-
+        Nil
     }
 
-    State(update, state)
+    State(updates, state)
   }
 }

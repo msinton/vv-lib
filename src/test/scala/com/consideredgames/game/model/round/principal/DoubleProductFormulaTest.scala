@@ -1,8 +1,7 @@
 package com.consideredgames.game.model.round.principal
 
-import com.consideredgames.game.model.resources.{ResourceGroup, ResourceProduct}
 import com.consideredgames.game.model.resources.Resources.{GoodMeal, Meal}
-import com.consideredgames.game.model.round.principal.DoubleProductFormula
+import com.consideredgames.game.model.resources.{ResourceGroup, ResourceProduct}
 import org.scalatest.FunSuite
 
 /**

@@ -2,7 +2,7 @@ package com.consideredgames.game.logic.deployment
 
 import com.consideredgames.game.model.game.GameState
 import com.consideredgames.game.model.person.NewPersonInstruction
-import com.consideredgames.game.model.player.{PlayerData, PlayerWithPeople}
+import com.consideredgames.game.model.player.PlayerWithPeople
 import com.consideredgames.message.{DeployBoat, DeployedBoat, DeployedPerson, Deployments}
 
 /**

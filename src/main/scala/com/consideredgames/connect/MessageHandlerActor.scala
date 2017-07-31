@@ -3,7 +3,7 @@ package com.consideredgames.connect
 import akka.Done
 import akka.actor.{Actor, ActorRef}
 import akka.stream.scaladsl.Sink
-import com.consideredgames.game.event.{Connected, Disconnected}
+import com.consideredgames.game.event.{ConnectAttempt, Connected, Disconnected}
 import com.consideredgames.message.Messages.{Message, _}
 
 import scala.concurrent.Future
@@ -19,7 +19,7 @@ class MessageHandlerActor(eventHolder: EventHolder,
 
   import scala.concurrent.ExecutionContext.Implicits.global
 
-  private var requestHandler: Option[ActorRef] = _
+  private var requestHandler: Option[ActorRef] = None
 
   private def setDisconnected() = {
     eventHolder.pushEvent(Disconnected)
@@ -62,7 +62,9 @@ class MessageHandlerActor(eventHolder: EventHolder,
     message match {
 
       case r: Register => registerHandler ! r
+        eventHolder.pushEvent(ConnectAttempt)
       case l: Login => loginHandler ! l
+        eventHolder.pushEvent(ConnectAttempt)
 
       case _ => requestHandler.foreach {actor => actor ! message}
     }

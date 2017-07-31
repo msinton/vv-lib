@@ -104,11 +104,10 @@ class PrincipalActionsProcessor(val actions: Actions, random: Random, weatherMan
     }
   }
 
-  def postProcessForServer(actionProcessResult: PrincipalPhasePreProcess, playerData: PlayerData): Unit = {
+  def postProcessForServer(actionProcessResult: PrincipalPhasePreProcess, playerData: List[PlayerWithPeople]): Unit = {
 
     actionProcessResult.attackResults.deaths.foreach {
-      case (colour, people) => playerData.players.filter { case (_, player) => player.colour == colour }.foreach { p =>
-        val player = p._2
+      case (colour, people) => playerData.filter { _.colour == colour }.foreach { player =>
         people.foreach(player.kill)
       }
     }
